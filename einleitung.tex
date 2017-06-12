@@ -1,0 +1,37 @@
+% kapitel einleitung des ersten hauptteils
+
+
+The problem of scheduling jobs and machines in flexible manufactoring systems has been addressed in scientific papers
+for a vast amount of complex variations. For this thesis a currently relatively unexplored
+set-up is considered: The scheduling of vehicles in a cyclic flexible manufactoring
+system. Flexible manufactoring systems are used in a wide range of fields and in
+occur in a lot of different variations. Additional machines at stages allow for a
+bypass of possible bottlenecks by increasing throughput capacity. A cyclic system is
+distinct from the standard version in that the depot is starting point and finish
+for all jobs in the system. 
+
+As automation is becoming increasingly relevant each day, the problem tackled here sets
+the vehicles carrying jobs between the machines to be automatically guided (AGVs). The approach
+considering vehicles without driver has been addressed for non cyclic problems in papers
+like insertpaperhere with special consideration of problem1 and insertpaperhere focusing on 
+problem2. First considerations of the cyclic variant have been made by Blazewicz and Pawlak citationSVCFMS
+in which they introduced the idea of the vehicles staying in a steady cycle without any
+waiting time for possible unfinished jobs and the machine schedule itself being given, allowing 
+for focus on the scheduling of the AGVs alone. The first of these premises eliminates the potential of collisions between
+the AGVs while the second reduces the amount of changeable variables. This thesis builds upon some of the 
+findings of Blazewicz and Pawlak and implements a meta-heuristical approach by introducing a local search.
+
+While the goal of the paper by Blazewicz and Pawlak was to solely minimize the amount of AGVs, here the approach is changed a bit:
+By fixating the amount of machines in an iteration of the meta-heuristic and simply focusing on the scheduling of a given
+amount of machines to minimize the makespan, a set of solutions for different amount of AGVs is received and a cost function depending
+on the amount of machines and the amount of overall delay in the for a given deadline can be used to select a final
+solution. If the goal remains to minimize the amount of AGVs for production without delay, the cost function can be set
+to cost any constant c for each machine and Big-M per unit of delay.
+
+
+
+%xxx optionale einleitung des ersten hauptteils
+
+
+%In dieser Arbeit werden xxx behandelt. \cite{Ableitinger2013kap2} sowie \cite{Aue2013} und \cite{Beutelspacher2011} und die letzte Quelle \cite{BifieStandards}.
+

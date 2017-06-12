@@ -1,0 +1,26 @@
+Before we are able to try and approach the problem with a local search algorithm, the local search itself has to be defined more clearly. As stated
+in the previous chapter, the idea is to vary the amount of machines available and find optima for all of those cases to be able to display a pareto
+frontier. To be able to achieve this it is necessary to adjust the original variable neighbourhood search, in that there is little to no gain by
+constantly swapping between the neighbourhoods, as the solutions received for the maximum makespan with a given amount of AGVs cannot be directly
+compared. The swapping of neighbourhoods is therefore reduced to be only once after a given amount of iterations, which is set beforehand, for a
+given amount of AGVs. This in turn means that each swap of neighbourhood means that the previous neighbourhood is assigned a solution that is then
+saved in the pareto frontier. As this modified approach has now drifted away considerably from the original approach of variable neighbourhood search,
+the author deems it necessary to rename the heuristical approach to be more simply called "iterated neighbourhood search".
+
+For the actual implementation of the model a few parameters have to be set. These include the number of iterations that the local search is going
+to run for per amount of machines, the maximum amount of machines and of course all the parameters set by a specific test environment have to be
+saved, namely the amount of production stages, the production machines for each stage, the amount of jobs, the lap time of an AGV, the time needed 
+by an AGV to traverse between machines, the schedule of jobs on the production machines and of course the process time for each job on each machine.
+As noted in a previous chapter, the only input variable is the actual starting time for each of the AGVs.
+
+To venture a bit further into the comparability of the heuristic, this paper introduces multiple variations working on the same base construct.
+The main difference is in the pertubation step which happens after each iteration that has "stranded" in a local optimum. The base version was
+a simple random jump. The starting time of every AGV, except for AGVs starting at "0", is set to a random starting point and the neighbourhood
+search starts anew. Before each of these pertubations the currently reached solution is compared to the best so far reached solution for the given
+amount of AGVs and is saved if it is an improvement. Different from this probabilistic approach, the second variation of the heuristic set out to
+be deterministic, except for the generation of the starting solution. The idea behind the differences in pertubations is to be able to achieve
+comparability between efficiency and reliability. The deterministic approach sets all starting times of AGVs not starting at "0" to be starting
+a set amount of units of time early(if the starting time would be negative, the time is instead counted down starting from the last possible start).
+As local searches with deterministic pertubations generally suffer from the same problem, namely the pertubation either being too high, resulting
+in almost random jumps, or being too low, resulting in getting stuck at a local optimum, not being able to leave, the heuristic is run multiple
+times with varying pertubation lengths.
