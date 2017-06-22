@@ -1,9 +1,15 @@
-Due to the NP-completeness of the problem the general approach was to find a suitable heuristic that would be able to provide a relatively decent
-solution, while maintaining a low running time. There is a wide choice of heuristical approaches described in detail in a vast amount of papers,
-the idea was to find one which would be able to provide an approach useful to the problem of scheduling AGVs in the circular system. For this reason
-the local search meta-heuristic was chosen as an underlying approach, in part because a neighbourhood can be relatively easily defined in a scheduling
-problem and partly because a special form of the neighbourhood search, the variable neighbourhood search, opened up a new approach to the general
-problem. 
+The problem of minimizing the amount of vehicles in a circular flexible flow shop was found to be NP-complete by AUTHOR (Unpublished Paper). If this
+holds true, then the problem being optimized in this thesis is also NP-complete. Therefore the approach was to find a suitable heuristic that would be able to provide a relatively decent
+solution, while maintaining a low running time. The selection of heuristical and meta-heuristical approaches for scheduling problems is vast, for
+flexible flow shop problems alone there have been multiple heuristical approaches e.g. AUTHORPAPER and AUTHORPAPER
+
+The idea was to find a heuristical approach, which would be able to provide an approach specifically useful to the problem of scheduling AGVs in the circular system. For this reason
+the local search meta-heuristic was chosen as an underlying approach. The neighborhood search has a few advantages: Defining the neighborhood of
+a scheduling problem is relatively easy. In this thesis the neighborhood is defined by all possibilities to move the starting time of an AGV by
+a single unit. For any given amount of vehicles the amount of possible moves inside the neighborhood is therefore two times n since every machine
+can start a unit of time earlier or later. In the event of a machine starting at the last possible starting point, starting right at the beginning
+of the program is considered to be a neighbour and vice versa. Additionally a specific version of the neighborhood search, the variable neighborhood search,
+offers even more detailed customization options to fit the problem.
 
 The variable neighbourhood search, as closer described in PAPERHERE by AUTHOR, tries to improve the solution of the standard approach by limiting
 an iteration of the search to a predefined neighbourhood and switching to a different one for the next iteration. This leads to higher coverage of
