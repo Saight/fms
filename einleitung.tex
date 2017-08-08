@@ -1,35 +1,19 @@
-Abstract
 
-The problem of scheduling jobs and machines in flexible manufactoring systems has been addressed in scientific papers
-for a vast amount of complex variations. One of the big issues in this category of problems is, that even very basic
-variations of the problems connected with such systems are NP-complete e.g. scheduling of jobs in a flexible manufactoring
-system with transportation (proven in PAPER) or scheduling of jobs on parallel machines (proven in PAPER). This thesis
-tries to approach the underlying problem from an entirely different perspective: The schedule of jobs at each stage is considered
-given, only the amount of transportation vehicles can be varied. In addition to the constraint of the jobs being in a set order, the
-transportation vehicles are only allowed to follow a set circuit, visiting all the machines in the order in which the
-jobs need to be processed, to finally return to the depot and start a new lap. This paper tries to solve the problem with
-a heuristical approach derived from the idea of Variable Neighborhood Search, which is broken into its pieces to offer
-an iterative neighborhood search for a two-dimensional target function. This heuristic is then applied in two ways, with
-differences in the pertubation phase. In addition to the general heuristical approach, a Brute Force algorithm is used to
-solve a test case to be able to compare the solutions and runtimes of the heuristics with an approach which returns the optimal
-solution. The heuristic variations and the brute force algorithm were implemented using Python.
-
-Introduction
 
 The field of scheduling problems has been a topic of interest for researches of various fields for dozens of years already. Through
-revelations of technology and economy however the field of new problems expands at a similar rate to the field of solved ones. While simple
-approaches have been solved for some time now, globalisation not only leads to scheduling problems within the company, between factories 
-that are distributed globally but also to having bigger factories than ever before, resulting in a higher amount of machines and more jobs
-to be scheduled. With technological advancements however those bigger factories are not simply staying the same problems simply enlarged in
+revelations of technology and economy however the field of new problems expands at a similar rate to the field of solved ones. While simpler
+approaches have been solved for some time now, globalisation not only leads to scheduling problems between factories 
+that are distributed worldwide, but also to having bigger factories than ever before, resulting in a higher amount of machines and more jobs
+to be scheduled. With technological advancements those bigger factories are not simply staying the same problems enlarged in
 quantity of machines and jobs, but sophisticated new systems are being developed to be able to increase production speed, volume or reduce
-the amount of manual labor needed. The idea of offering multiple machines at a single stage of the production process lead researchers to the
+the amount of manual labour needed. The idea of offering multiple machines at a single stage of the production process lead researchers to the
 model of the Flexible Flow Shop. As with all flow shop problems the basic idea is that all jobs have to be processed on a set amount of machines in
 the same order. As this can relatively easily lead to bottlenecks due to most jobs taking a considerable amount longer on a given machine, the idea
 of parallel machines at a single stage is introduced. Each job being delivered to a stage with parallel machines may be assigned to either of
 those machines to be processed, its schedule for which machines to visit becomes flexible. 
 
 The scheduling problem focused on in this paper expands
-the idea of the flexible flow shop to make use of an additional technological advancement which use is quickly spreading throughout all kinds of
+the idea of the flexible flow shop to make use of an additional technological advancement, which use is quickly spreading throughout all kinds of
 industrial fields: Automation. Automation is becoming increasingly relevant as being able to replace workers with automated machines promises a
 significant competitive edge. In this paper the above mentioned problem of scheduling the jobs in a flexible flow shop environment is set to be
 given. The focus here lies on the problem of transportation for the jobs between the machines. With the idea of flexible flow shop including multiple

@@ -1,0 +1,27 @@
+In this section the paper will go into depth as to how the problem was approached from a mathematical perspective. To be able to approach the problem
+with a programmed algorithm, some definitions have to be made beforehand. As described closer in previous chapters, the general idea is that AGVs
+are released onto a track, where they will run in a neverending circle. Upon reaching a machine or the depot the currently loaded job is unloaded and
+the job that is scheduled to be processed the earliest on the next machine is selected from the jobs waiting in the outgoing queue at the machine.
+Jobs unloaded at a machine are placed in the incoming queue. Note that this queue does not have a real order as the schedule of jobs on the machines is
+given, meaning that even though a job might have been the first to arrive at a machine, it might not get processed at said machine until after some
+other jobs have been. The objective of the program is to minimize the maximum completion time for a given amount of AGVs \(V\). The objective function can therefore be
+depicted as:
+
+\begin{equation}
+\mathrm{min}\>C_{max}
+\end{equation}
+
+For this formulation a relatively long list of constraints has to be set, which will now be explained in detail. Constraint (1) is set to make sure
+that every available vehicle has to start before a full lap could have been made, since if a vehicle was to start at a later point in time it would
+simply miss a full lap that could have been achieved by letting the vehicle start roundtime \(R\) units of time earlier.
+
+\(s.t.:\)
+\begin{equation}
+\sum_{t=0}^{R-1}s_{v t} = 1\ldots \forall v.
+\end{equation}
+\begin{equation}
+s_{v t}\in\{0,1\}
+\end{equation}
+
+In addition to setting the vehicle starting time to be in the range of the optimal starting time, this restriction also guarantees that each vehicle
+will start at only one point in time which has to hold true to be able to determine the position of the vehicle throughout the rest of the program.

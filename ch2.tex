@@ -4,36 +4,32 @@ solution, while maintaining a low running time. The selection of heuristical and
 flexible flow shop problems alone there have been multiple heuristical approaches e.g. AUTHORPAPER and AUTHORPAPER
 
 The idea was to find a heuristical approach, which would be able to provide an approach specifically useful to the problem of scheduling AGVs in the circular system. For this reason
-the local search meta-heuristic was chosen as an underlying approach. The neighborhood search has a few advantages: Defining the neighborhood of
+the local search meta-heuristic was chosen as an underlying approach. Local search has a great advantage: Defining the neighborhood of
 a scheduling problem is relatively easy. In this thesis the neighborhood is defined by all possibilities to move the starting time of an AGV by
-a single unit. For any given amount of vehicles the amount of possible moves inside the neighborhood is therefore two times n since every machine
+a single unit. For any given amount of vehicles the amount of possible moves inside the neighborhood is therefore two times m with m being the number of machines, since every machine
 can start a unit of time earlier or later. In the event of a machine starting at the last possible starting point, starting right at the beginning
-of the program is considered to be a neighbour and vice versa. Additionally a specific version of the neighborhood search, the variable neighborhood search,
-offers even more detailed customization options to fit the problem.
+of the time window is considered to be a neighbour and vice versa. This basic outline of the local search provided the corner stone for the algorithm
+finally implemented. 
 
-The variable neighbourhood search, as closer described in PAPERHERE by AUTHOR, tries to improve the solution of the standard approach by limiting
-an iteration of the search to a predefined neighbourhood and switching to a different one for the next iteration. This leads to higher coverage of
-the whole solution space and a reduced chance to get stuck in a local optimum. While the problem of minimizing the amount of AGVs needed proved
-to be tricky to divert into neighbourhoods to apply a variable neighbourhood search, it offered up the possibility of a reformulation of the original
-problem. In the original problem the goal was solely to minimize the amount of AGVs needed to finish on time. If however the problem is changed to
-have two objectives, being the minimization of the makespan and the minimization of the amount of vehicles needed, the approach of the variable
-neighbourhood search can be easily applied by setting the different neighbourhoods to be all scheduling possibilities while varying the amount of
-machines available. This opens up a new problem: Because a higher amount of machines will generally result in a lower makespan, the solutions gained
-from different neighbourhoods are now ineligible for unreflected comparison.
+The basic implementation described above however proved to be too simple as problems with the multidimensionality of the objective function required a more specialized approach with an algorithm
+tailored to distinguish better between the quality of received solutions. In the original problem the goal was solely to minimize the amount of AGVs needed to finish on time. If however the problem is changed to
+have two objectives, being the minimization of the makespan and the minimization of the amount of vehicles needed, a new problem arises: 
+Because a higher amount of machines will generally result in a lower makespan, the solutions gained from different neighbourhoods are now ineligible for unreflected comparison.
 
-Because of this problem a new approach, developed for multidimensional target functions, is introduced: A pareto frontier. AUTHOR2 wrote about the
+Because of this problem a new tool, developed for multidimensional objective functions, is introduced: A pareto frontier. AUTHOR2 wrote about the
 idea of a pareto frontier extensively and showing that it offered the possibility of displaying the optima of a multidimensional problem and allowed
-for the choice of a preferred solution through implementation of an additional target function (e.g. a cost function of the two dimensions
-displayed) or simply by personal preference. The pareto frontier was chosen as an instrument for this thesis, because of a reason already touched
+for the choice of a preferred solution through implementation of an additional objective function (e.g. a cost function of the two dimensions
+displayed) or simply by personal preference. The pareto frontier was chosen as an instrument for this thesis because of a reason already touched
 previously: Due to the nature of scheduling problems increasing the number of AGVs available to transport the jobs between the machines will in
 its optimal configuration always yield a makespan that is better or as a worst case equal to the makespan received when calculating with one less
-AGV. This can easily be proven by finding the optimal solution for a given amount of AGVs n and then increasing the amount. All AGVs are assigned
+AGV. This can be proven by finding the optimal solution for a given amount of AGVs n and then increasing the amount. All AGVs are assigned
 exactly the same starting time as the previously attained optimal solution for n AGVs. The newly added AGV can be freely allocated to any starting
-time. This results in all jobs being picked up either at the exact same time as previously or, due to the newly added AGV, earlier than previously.
-Therefore the total makespan will at the worst case stay the same(e.g. the newly added machine does not transport any job in the system or the
+time. This results in all jobs being picked up either at the exact same time or, due to the newly added AGV, earlier than previously.
+Therefore the total makespan will in the worst case stay the same(e.g. the newly added machine does not transport any job in the system or the
 earlier transport of a job simply results in longer time in queue due to the processing time of the previous job)
 
 In this thesis the received pareto frontier will not be filtered through the introduction of a cost function, as this simply picks one of the solutions
-from the list, instead a comparison will be made for each amount of machines up to a set limit between the heuristical solution and an optimal
-solution obtained through a brute-force algorithm. The difference in run time and target value will then be used to determine whether the heuristic
+from the list and is highly subjective. Instead a comparison will be made for each amount of machines up to a set limit between the heuristical solution and an optimal
+solution obtained through a Brute Force Algorithm. The difference in run time and target value will then be used to determine whether the heuristic
 offers a significant reduction in the first, while maintaining only a slight reduction in the latter.
+
