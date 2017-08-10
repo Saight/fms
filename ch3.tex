@@ -25,3 +25,14 @@ As local searches with deterministic pertubations generally suffer from the same
 in almost random jumps, or being too low, resulting in getting stuck at a local optimum not being able to leave, the heuristic is run multiple
 times with varying pertubation lengths.
 
+The reasoning behind the refusal to change the starting times of machines starting at zero stems from the fact that minimizing the maximum makespan
+is proven to be a regular function (zitat wär gut). If all machines would start a set amount of units of time later, the objective value would simply
+be the same plus the added delay and all jobs would be transported by the same vehicles and processed on the same parallel machines as before. The
+regularity of the objective function requires at least one of the vehicles to start at 0, which led to the decision of simply keeping the starting
+time of vehicles already starting at 0. This however does not mean that the starting time of a vehicle is set in stone once it reaches zero, it may
+still change during the local search process of finding a better neighbour. If the objective value of the program is better if the vehicle in question
+starts at either 1 or \(R\)-1 (the neighbours of 0), then that move will be made, if it is the best available.
+
+The explanation of the implementation of the model in Python will be segmented into two subchapters. The first will go into extensive detail about
+the program written to obtain objective values for a given set of vehicle starting times. The second subchapter focuses on the implementation of the
+heuristic itself.

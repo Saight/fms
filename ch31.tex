@@ -1,0 +1,38 @@
+As suggested by the title of this chapter, the program written to return the objective values is a simulation of the problem. The program runs in
+steps of single units of time and checks for the following events to occur in chronological order
+
+The first events check if jobs have been completed on the machines:
+
+\begin{itemize}
+\item Is a job currently being worked on by a machine?
+
+\item If there is, is it due to finish right now?
+\end{itemize}
+
+The second set of events looks at everything happening with the vehicles:
+
+\begin{itemize}
+\item Is a vehicle currently passing a machine/ the depot?
+
+\item If it is passing the depot: Is the vehicle loaded?
+
+\item Is there a job in the outgoing queue of the depot?
+
+\item If there is, which job of the waiting jobs is the one scheduled earliest on the first machine?
+
+\item If it is passing a machine: Is the vehicle loaded?
+
+\item Is there a job in the outgoing queue of the machine?
+
+\item If there is, which job of the waiting jobs is the one scheduled earliest on the next machine?
+\end{itemize}
+
+After these checks were made the final checks for the machines have to be done:
+
+\begin{itemize}
+\item Is a machine currently idle?
+
+\item If it is, are there jobs waiting in the incoming queue of the machine?
+
+\item Which job is the one scheduled next on this machine?
+\end{itemize}

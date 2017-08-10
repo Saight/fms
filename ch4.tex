@@ -17,9 +17,9 @@ The objective function can therefore be depicted as:
 \mathrm{min}\>C_{max}
 \end{equation}
 
-For this formulation a relatively long list of constraints has to be set, which will now be explained in detail. Constraint (1) is set to make sure
+For this formulation a list of constraints has to be set, which will now be explained in detail. Constraint (1) is set to make sure
 that every available vehicle has to start before a full lap could have been made, since if a vehicle was to start at a later point in time it would
-simply miss a full lap that could have been achieved by letting the vehicle start roundtime \(R\) units of time earlier.
+simply miss a full lap that could have been achieved by letting the vehicle start roundtime \(R\)(the time needed to complete one lap) units of time earlier.
 
 \(s.t.:\)
 \begin{equation}
@@ -33,11 +33,11 @@ In addition to setting the vehicle starting time to be in the range of the optim
 will start at only one point in time which has to hold true to be able to determine the position of the vehicle throughout the rest of the program.
 
 The following constraints are the capacity constraints for all vehicles, which ensure that every job has to be transported from every machine to the
-next without every hurting the constraint that a vehicle may solely carry a single job at a time. This is depicted in a multidimensional binary matrix
+next without ever hurting the constraint that a vehicle may solely carry a single job at a time. This is depicted in a multidimensional binary matrix
 for all combinations of vehicles, jobs, passing of a vehicle and machines picked up from. Here it is very important to distinguish which combinations are mutually exclusive.
 Time restrictions are not shown as units of time passed, instead each column of the matrix represents a passing of the vehicle at the machine currently
 being observed (time window \(w\)). Note that \(W\) represents the total amount of passings of a vehicle at a machine in the observed time frame. It
-is not indexed here as the observed time frame, which simply serves as an absolute upper bound for time passed, can be chosen so that \(W\) is the same
+is not indexed here, as the observed time frame, which simply serves as an absolute upper bound for time passed, can be chosen so that \(W\) is the same
 for all vehicles through \(W = R - 1 + R * c\) with \(c\) being a freely choseable constant. Note that \(m = 0\) denotes the depot from which all jobs
 start.
 
@@ -59,8 +59,8 @@ and for all machines.
 After setting these base constraints for the handling of vehicle capacities the next constraints serve to ensure that time windows on machines are not hurt.
 Every machine can only work on a single job at a given time, though there might be multiple machines at a given stage. In addition the given schedule of
 jobs on machines may not be violated, but this schedule does not necessarily have to hold for the schedule of jobs transported to a machine. As vehicles
-are not allowed to wait for unfinished jobs requiring the same schedule on, transportation as required on the next machine would result in unnecessary
-empty trips and transporting a not yet needed job will not pose a problem as incoming queues at all machines are set to be of infinite size. Note that
+are not allowed to wait for unfinished jobs, transportation as required on the next machine would result in unnecessary
+empty trips and transporting a not yet needed job will not pose a problem, as incoming queues at all machines are set to be of infinite size. Note that
 \(st_{j,m}\) is the starting time of a job at a machine, \(p_{j,m}\) the corresponding processing time, \(tr_{m}\) is the time a vehicle needs to get from
 the depot to machine \(m\) and \(mps_{m}\) is the amount of parallel machines at stage \(m\). Due to there being no restriction of jobs having to be in the
 same processing order as they were on the previous machine the indexing of jobs currently being regarded is changed to be dependent on the Schedule of jobs
@@ -92,7 +92,7 @@ that a job may only start after actually being delivered to the machine first wh
 if its direct predecessor has been started already. Constraint (11) serves to sort special cases in which a job may have reached the next machine
 earlier than its predecessor due to variability in vehicle availability and completion time on the previous machine.
 
-The following constraint targets at the act of jobs being picked up for transportation by passing vehicles. The binary matrix depicting the
+The next constraint targets the act of jobs being picked up for transportation by passing vehicles. The binary matrix depicting the
 time window \(w\) of the pick up of a job \(j\) at a machine \(m\) by a vehicle \(v\) must not violate the actual processing times of the jobs at
 the given machines. Therefore the following constraint has to be set:
 
