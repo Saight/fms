@@ -16,12 +16,12 @@ def read_input_schedule(inputfile):
     return schedule
 
 def pmachinesperstage_func(duration):
-    avgmachine = sum(sum(element for element in duration[index]) for index in range(len(duration)))/len(duration[0])
+    avgmachine = sum(sum(element for element in duration[index]) for index in range(len(duration)))/len(duration)
     pmachinesperstage = []
-    for i in range(len(duration[0])):
+    for i in range(len(duration)):
         machinesum = 0
-        for j in range(len(duration)):
-            machinesum += duration[j][i]
+        for j in range(len(duration[0])):
+            machinesum += duration[i][j]
         avg = machinesum
         if avg/avgmachine < 0.8:
             pmachinesperstage.append(1)
