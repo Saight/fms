@@ -30,4 +30,23 @@ schedules. After each iteration the best found solution is compared to the overa
 If it is better then the schedule and the corresponding objective value are stored. For each all integer amounts of vehicles up to the set maximum
 this process is repeated a number of times equal to the amount of iterations set as a parameter upon the start of the program. Each of the iterations
 will start with a new starting sequence. Here is where the differences of the probabilistic and the deterministic approach come into play. The probabilistic
-approach simply sets the starting point of the first vehicle to one and randomizes the starting points of all the other vehicles. 
+approach simply sets the starting point of the first vehicle to one and randomizes the starting points of all the other vehicles. The deterministic
+approach on the other hand needs an additional parameter which sets the length of the "jump" that all starting times other than those of vehicles
+starting at 0 make. The idea behind a deterministic approach is to try and find a distance of the "jump" which helps to cover most of the population.
+Setting the length of the jump too low will result in getting stuck in a local optimum, while setting it too high will have similar results to simply
+generating the starting sequences at random. To show the influence of the jump lengths on the solution quality of the heuristic, different jump lengths
+are tested and put into comparison in the following chapter.
+
+Before finally being able to print the found solutions two more steps are implemented: 
+
+\begin{itemize}
+  \item If the best solution found for any amount of vehicles returns a worse objective value than the solution with one less vehicles, a new sequence
+    is generated. The starting time of all vehicles of the lower solutions are copied and the last remaining vehicle receives a random starting time.
+    This objective value of the newly generated solution is at least as good as the objective value of the sequence without the last vehicle.
+  \item If either of the best solutions is a sequence that does not contain any vehicle starting at 0, all of the vehicles contained in the sequence
+    are set to start exactly as many units of time earlier as it takes until at least one vehicle starts at 0. The regularity of the target function
+    guarantees that the objective value of the newly generated sequence will be exactly that many units of times lower.
+\end{itemize}
+
+The program of the heuristic finishes by "fusing" the starting times of the vehicles for compared amounts of vehicles into a single array and prints
+the received array alongside the corresponding objective value. These values may then be displayed graphically to form a pareto front.
