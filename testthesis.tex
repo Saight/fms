@@ -29,7 +29,7 @@
 %===================================================================
 
 \usepackage[utf8]{inputenc}  %Zeichencodierung in den Textfiles
-\usepackage[english,ngerman]{babel}  %deutsche Rechtschreibung, Worttrennung
+%\usepackage[english,ngerman]{babel}  %deutsche Rechtschreibung, Worttrennung
 \usepackage[T1]{fontenc}     %Schriftcodierung
 \usepackage{lmodern}      %LaTeX-Schriftpaket laden (lmodern)
 %\usepackage{microtype} % für zeilenumbrüche etc, verträgt sich nicht mit  allen schriften. Einfach probieren oder in der dokumentation nachlesen
@@ -87,9 +87,9 @@
   sorting=none
   ]
   {biblatex}
-\addbibresource{literatur-da.bib} %laden der literaturliste
-\DefineBibliographyStrings{ngerman}{andothers={et\addabbrvspace al\adddot}}
-\DefineBibliographyStrings{ngerman}{urlseen={abgerufen am}}
+\bibliography{literatur-da} %laden der literaturliste
+%\DefineBibliographyStrings{ngerman}{andothers={et\addabbrvspace al\adddot}}
+%\DefineBibliographyStrings{ngerman}{urlseen={abgerufen am}}
 
 
 
@@ -287,7 +287,7 @@
 %===================================================================================
 
 \renewcommand{\bibname}{Literatur}
-\printbibliography 
+\printbibliography
 
 \cleardoublepage
 
