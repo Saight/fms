@@ -1,7 +1,7 @@
 The problem of minimizing the amount of vehicles in a circular flexible flow shop was found to be NP-complete by Blazewicz and Grzegorz in an unpublished paper. If this
 holds true, then the problem being optimized in this thesis is also NP-complete. Therefore the approach was to find a suitable heuristic that would be able to provide a relatively decent
 solution, while maintaining a low running time. The selection of heuristical and meta-heuristical approaches for scheduling problems is vast, for
-flexible flow shop problems alone there have been multiple heuristical approaches e.g. AUTHORPAPER and AUTHORPAPER
+flexible flow shop problems alone there have been multiple heuristical approaches e.g. Wang 2005 \cite{wang2005} and Levner in 2010 \cite{levner2010}.
 
 The idea was to find a heuristical approach, which would be able to provide an approach specifically useful to the problem of scheduling AGVs in the circular system. For this reason
 the local search meta-heuristic was chosen as an underlying approach. Local search has a great advantage: Defining the neighborhood of
@@ -16,10 +16,9 @@ tailored to distinguish better between the quality of received solutions. In the
 have two objectives, being the minimization of the makespan and the minimization of the amount of vehicles needed, a new problem arises: 
 Because a higher amount of machines will generally result in a lower makespan, the solutions gained from different neighbourhoods are now ineligible for unreflected comparison.
 
-Because of this problem a new tool, developed for multidimensional objective functions, is introduced: A pareto frontier. AUTHOR2 wrote about the
-idea of a pareto frontier extensively and showing that it offered the possibility of displaying the optima of a multidimensional problem and allowed
-for the choice of a preferred solution through implementation of an additional objective function (e.g. a cost function of the two dimensions
-displayed) or simply by personal preference. The pareto frontier was chosen as an instrument for this thesis because of a reason already touched
+Because of this problem a new tool, developed for multidimensional objective functions, is introduced: A pareto front. The pareto front is seen as the collection of all pareto optima of a multidimensional objective function, meaning that none of the objectives can be improved without simultaneously reducing the objective value for at least one other. In addition a pareto front allows
+for the choice of a preferred solution among all the pareto optima through implementation of an additional objective function (e.g. a cost function of the two dimensions
+displayed) or simply by personal preference. The pareto front was chosen as an instrument for this thesis because of a reason already touched
 previously: Due to the nature of scheduling problems increasing the number of AGVs available to transport the jobs between the machines will in
 its optimal configuration always yield a makespan that is better or as a worst case equal to the makespan received when calculating with one less
 AGV. This can be proven by finding the optimal solution for a given amount of AGVs n and then increasing the amount. All AGVs are assigned
@@ -28,7 +27,7 @@ time. This results in all jobs being picked up either at the exact same time or,
 Therefore the total makespan will in the worst case stay the same(e.g. the newly added machine does not transport any job in the system or the
 earlier transport of a job simply results in longer time in queue due to the processing time of the previous job)
 
-In this thesis the received pareto frontier will not be filtered through the introduction of a cost function, as this simply picks one of the solutions
+In this thesis the received pareto front will not be filtered through the introduction of a cost function, as this simply picks one of the solutions
 from the list and is highly subjective. Instead a comparison will be made for each amount of machines up to a set limit between the heuristical solution and an optimal
 solution obtained through a Brute Force Algorithm. The difference in run time and target value will then be used to determine whether the heuristic
 offers a significant reduction in the first, while maintaining only a slight reduction in the latter.

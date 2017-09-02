@@ -27,8 +27,8 @@ currently being worked on at the next stage, and waiting in the outgoing queue o
 processed on a machine at the next stage, the second job would be next in line. If that job is not available for transportation, by not being in line yet
 or already being transported, the third is considered and so on.
 
-The original problem which laid the foundation for this paper, as described by AUTHOR in PAPER, differs from the problem the actually examined
-problem in another feature: In the paper by AUTHOR the goal was to minimize the amount of vehicles it takes to be able to
+The original problem which laid the foundation for this paper, as described by Blazewicz in an unpublished paper \cite{blazewicz198}, differs from the problem the actually examined
+problem in another feature: In the paper by Blazewicz the goal was to minimize the amount of vehicles it takes to be able to
 deliver all jobs in time to satisfy a given schedule with the amount of allowed laps being given. The approach in this thesis is that there is no
 given deadline known beforehand. The idea is to offer multiple solutions with differing amounts of AGVs given. Each of these solutions will assign
 a makespan to a given amount of vehicles, which is defined by the sum of time units passed from the start of the problem until all jobs have been
@@ -41,40 +41,3 @@ approach has been chosen because it increases the flexibility of the whole appro
 is certainly not only suitable for a rare case, as these problems occur very often in all kinds of fields, a two-dimensional approach which also
 looks at the total makespan introduces the possibility of a deadline that may be broken for a cost (late surcharge) or even simpler a model in
 which the return is based on producing as fast as possible.
-
-
-
-
-
-
-
-
-
-%The following example shows as to how
-%picking up jobs in a different order might worsen the solution.
-
-%Consider a problem with a single AGV and a schedule on machine n+1 set to be [1,2,3]. Jobs 2 and 3 are currently waiting to be picked up 
-%in the outgoing queue of machine n, while job 1 is still currently being processed on machine n. Considering the lemma an incoming AGV has to pick
-%up job 2 as it is the next job which is supposed to be processed on machine n+1 and sitting in the outgoing queue of machine n. In this case the 
-%AGV now picks up job 3 instead and delivers it to machine n+1, where job 3 is now waiting in the incoming queue. While the AGV is continuing its
-%lap job 1 has now been finished on machine n and is ready for pick up. As the AGV returns to machine n the job 1 is now picked up and delivered
-%to the machine n+1, where it can immediately start to be processed. Somewhere during the continuation of the lap of the AGV job1 is finished on
-%machine n+1 and the machine is free to process a new job. Here however it is unable to do so as in the incoming queue there is still only the
-%job 3, which is supposed to be processed only after the job 2. If the AGV had picked up job 2 in the first round the job could have been started
-%now, so the decision to load job 3 led to an increase in makespan that is at least the minimum of the processing time of job 2 on the second
-%machine and the time it takes the AGV to pick up and deliver job 2.
-
-%The original problem which laid the foundation for this paper, as described by AUTHOR in PAPER, differs from the problem the actually examined
-%problem in another small but important feature: In the paper by AUTHOR the goal was to minimize the amount of vehicles it takes to be able to
-%deliver all jobs in time to satisfy a given schedule with the amount of allowed laps being given. The approach in this thesis is that there is no
-%given deadline known beforehand. The idea is to offer multiple solutions with differing amounts of AGVs given. Each of these solutions will assign
-%a makespan to a given amount of vehicles, which is defined by the sum of time units passed from the start of the problem until all jobs have been
-%completed and have been transported back to the depot. These solutions can then be ranked e.g. via
-%a cost function that takes vehicles and time needed into consideration or, if the goal is to finish ahead of a given deadline, the cost function
-%can be set to infinite when exceeding the threshold, so simply the solution with the fewest vehicles that finishes in time will be selected.
-
-%As briefly mentioned in the previous paragraph, this paper reformulates the problem posed in the paper by AUTHOR to be multidimensional. This
-%approach has been chosen because it increases the flexibility of the whole approach. While the approach with a given deadline that must be met
-%is certainly not only suitable for a rare case as these problems occur very often in all kinds of fields, a two-dimensional approach which also
-%looks at the total makespan introduces the possibility of a deadline that may be broken for a cost (late surcharge) or even simpler a model in
-%which the return is based on producing as fast as possible.

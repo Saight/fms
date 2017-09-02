@@ -10,23 +10,24 @@ other jobs have been. The objective of the program is to minimize the maximum co
 
 \[
   C_{j} = (\sum_{w=1}^{W}\sum_{t=1}^{T} x_{v,j,m,w} * (s_{v,t} * t + (w-1) * R) + tr_{m-1}) + (R-tr_{m})
+  C_{max} \geq C_{j}, j \in J
 \]
 
 The objective function can therefore be depicted as:
 
-\begin{equation}
+\begin{equation} \label{eq:c1}
 \mathrm{min}\>C_{max}
 \end{equation}
 
-For this formulation a list of constraints has to be set, which will now be explained in detail. Constraint (1) is set to make sure
+For this formulation a list of constraints has to be set, which will now be explained in detail. Constraint~\ref{eq:c1} is set to make sure
 that every available vehicle has to start before a full lap could have been made, since if a vehicle was to start at a later point in time it would
 simply miss a full lap that could have been achieved by letting the vehicle start roundtime \(R\) (the time needed to complete one lap) units of time earlier.
 
 \(s.t.:\)
-\begin{equation}
-\sum_{t=0}^{R-1}s_{v,t} = 1\ldots \forall v.
+\begin{equation} \label{eq:c2}
+\sum_{t=0}^{R-1}s_{v,t} = 1, v \in V
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:c3}
 s_{v t}\in\{0,1\}
 \end{equation}
 
@@ -42,18 +43,18 @@ is not indexed here, as the observed time frame, which simply serves as an absol
 for all vehicles through \(W = R - 1 + R * c\) with \(c\) being a freely choseable constant. Note that \(m = 0\) denotes the depot from which all jobs
 start.
 
-\begin{equation}
- \sum_{j=1}^{J}x_{v,j,m,w} \leq 1 \ldots \forall v, \forall m, \forall w 
+\begin{equation} \label{eq:c4}
+ \sum_{j=1}^{J}x_{v,j,m,w} \leq 1, v \in V, m \in M, w \in W
 \end{equation}
-\begin{equation}
- \sum_{v=1}^{V}\sum_{w=1}^{W}x_{v,j,m,w} = 1 \ldots \forall j, \forall m
+\begin{equation} \label{eq:c5}
+ \sum_{v=1}^{V}\sum_{w=1}^{W}x_{v,j,m,w} = 1, j \in J, m \in M
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:c6}
  x_{v,j,m,w} \in \{0,1\}
 \end{equation}
 
-The side constraint (4) ensures that at any stage only at maximum a single job may be picked up at a machine, while still allowing for empty runs if no job
-is available. Constraint (5) limits the model to only allow each job to be transported from a machine once over all vehicles available, meaning that
+The side constraint~\ref{eq:c4} ensures that at any stage only at most one job may be picked up at a machine, while still allowing for empty runs if no job
+is available. Constraint~\ref{eq:c5} limits the model to only allow each job to be transported from a machine once over all vehicles available, meaning that
 each job will only pass each machine exactly once and if picked up by a chosen vehicle may not be picked up by another. This has to hold for all jobs
 and for all machines.
 
@@ -64,39 +65,38 @@ are not allowed to wait for unfinished jobs, transportation as required on the n
 empty trips and transporting a not yet needed job will not pose a problem, as incoming queues at all machines are set to be of infinite size. Note that
 \(st_{j,m}\) is the starting time of a job at a machine, \(p_{j,m}\) the corresponding processing time, \(tr_{m}\) is the time a vehicle needs to get from
 the depot to machine \(m\) and \(mps_{m}\) is the amount of parallel machines at stage \(m\). Due to there being no restriction of jobs having to be in the
-same processing order as they were on the previous machine the indexing of jobs currently being regarded is changed to be dependent on the Schedule of jobs
+same processing order as they were on the previous machine the indexing of jobs currently being regarded is changed to be dependent on the schedule of jobs
 on machines \(S_{m,pos}\).
 
-\begin{equation}
-  \sum_{i_{m} = 1}^{mps_{m}}prod_{j,m,i_{m}} = 1 \ldots \forall m, \forall j
+\begin{equation} \label{eq:c7}
+  \sum_{i_{m} = 1}^{mps_{m}}prod_{j,m,i_{m}} = 1, m \in M, j \in J
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:c8}
   prod_{j,m,i_{m}} \in {0,1}
 \end{equation}
-\begin{equation}
- st_{S_{m,pos},m} \geq \mathrm{max}((st_{S_{m,pos-k}, m} + p_{j-k,m}) * prod_{S_{m,pos},m,i_{m}} * prod_{S_{m,pos-k},m,i_{m}}\mid k \in {1,\ldots,pos-1}) \ldots \forall pos, \forall m, \forall i_{m}
+\begin{equation} \label{eq:c9}
+ st_{S_{m,pos},m} \geq \mathrm{max}((st_{S_{m,pos-k}, m} + p_{j-k,m}) * prod_{S_{m,pos},m,i_{m}} * prod_{S_{m,pos-k},m,i_{m}}\mid k \in {1,\ldots,pos-1}), m \in M, pos \in J, i_{m} \in mps_{m}
 \end{equation}
-\begin{equation}
- st_{S_{m,pos},m} \geq \sum_{v=1}^{V}(\sum_{w=1}^{W}\sum_{t=1}^{T} x_{v,S_{m,pos},m-1,w} * (s_{v,t} * t + (w-1) * R) + tr_{m-1}) \ldots \forall pos, \forall m
+\begin{equation} \label{eq:c10}
+ st_{S_{m,pos},m} \geq \sum_{v=1}^{V}(\sum_{w=1}^{W}\sum_{t=1}^{T} x_{v,S_{m,pos},m-1,w} * (s_{v,t} * t + (w-1) * R) + tr_{m-1}), m \in M, pos \in J
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:c11}
   st_{S_{m,pos},m} \geq st_{S_{m,pos-1},m}
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:c12}
   st_{S_{m,pos},m}\> \mathrm{int}
 \end{equation}
 
 The first constraint above ensures that each job is assigned to one of the parallel machines available at each of the machine stages. After defining
-on which of those the job will be processed the constraints (9) through (11) set the lower boundaries for when the job is able to start. Constraint
-(9) states that a job may only start as long as the previous job on the corresponding parallel machine has been processed. Constraint (10) ensures
-that a job may only start after actually being delivered to the machine first while constraint (11) finally denotes that the new job may only start
-if its direct predecessor has been started already. Constraint (11) serves to sort special cases in which a job may have reached the next machine
+on which of those the job will be processed the constraints~\ref{eq:c9} through~\ref{eq:c11} set the lower boundaries for when the job is able to start. Constraint~\ref{eq:c9} states that a job may only start after the previous job on the corresponding parallel machine has been processed. Constraint~\ref{eq:c10} ensures
+that a job may only start after actually being delivered to the machine first while constraint~\ref{eq:c11} finally denotes that the new job may only start
+if its direct predecessor has been started already. Constraint~\ref{eq:c11} serves to sort special cases in which a job may have reached the next machine
 earlier than its predecessor due to variability in vehicle availability and completion time on the previous machine.
 
 The next constraint targets the act of jobs being picked up for transportation by passing vehicles. The binary matrix depicting the
 time window \(w\) of the pick up of a job \(j\) at a machine \(m\) by a vehicle \(v\) must not violate the actual processing times of the jobs at
 the given machines. Therefore the following constraint has to be set:
 
-\begin{equation}
-  st_{S_{m,pos},m} + p_{S_{m,pos},m}\> \leq \sum_{w=1}^{W}\sum_{t=1}^{T} x_{v,S_{m,pos},m,w} * (s_{v,t} * t + (w-1) * R) + tr_{m} \ldots \forall pos \forall m
+\begin{equation} \label{eq:c13}
+  st_{S_{m,pos},m} + p_{S_{m,pos},m}\> \leq \sum_{w=1}^{W}\sum_{t=1}^{T} x_{v,S_{m,pos},m,w} * (s_{v,t} * t + (w-1) * R) + tr_{m}, m \in M, pos \in J
 \end{equation}

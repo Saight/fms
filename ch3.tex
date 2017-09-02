@@ -14,16 +14,16 @@ by an AGV to traverse between machines, the schedule of jobs on the production m
 As noted in a previous chapter, the only input variable is the actual starting time for each of the AGVs.
 
 To venture a bit further into the comparability of the heuristic, this paper introduces multiple variations working on the same base construct.
-The main difference is in the pertubation step which happens after each iteration that has "stranded" in a local optimum. The base version was
+The main difference is in the perturbation step which happens after each iteration that has "stranded" in a local optimum. The base version was
 a simple random jump. The starting time of every AGV, except for AGVs starting at 0, is set to a random starting point and the neighbourhood
-search starts anew. Before each of these pertubations the currently reached solution is compared to the best so far reached solution for the given
+search starts anew. Before each of these perturbations the currently reached solution is compared to the best so far reached solution for the given
 amount of AGVs and is saved if it is an improvement. Different from this probabilistic approach, the second variation of the heuristic set out to
-be deterministic, except for the generation of the starting solution. The idea behind the differences in pertubations is to be able to achieve
+be deterministic, except for the generation of the starting solution. The idea behind the differences in perturbations is to be able to achieve
 comparability between efficiency and reliability. The deterministic approach sets all starting times of AGVs not starting at 0 to be starting
 a set amount of units of time early(if the starting time would be negative, the time is instead counted down starting from the last possible start).
-As local searches with deterministic pertubations generally suffer from the same problem, namely the pertubation either being too high, resulting
+As local searches with deterministic perturbations generally suffer from the same problem, namely the perturbation either being too high, resulting
 in almost random jumps, or being too low, resulting in getting stuck at a local optimum not being able to leave, the heuristic is run multiple
-times with varying pertubation lengths.
+times with varying perturbation lengths.
 
 The reasoning behind the refusal to change the starting times of machines starting at zero stems from the fact that minimizing the maximum makespan
 is proven to be a regular function (zitat wär gut). If all machines would start a set amount of units of time later, the objective value would simply
