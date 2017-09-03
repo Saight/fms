@@ -1,13 +1,13 @@
 %Formulation of the problem
 
-The problem of a cylcic flexible manufactoring system has certain limitations, which will be expanded and described in this chapter. The baseline
-of the overall problem is that vehicles, that constantly go in a cycle, are used to carry jobs from one machine to the next. Extensive reasearch 
-has been made in various directions considering flexible manufactoring systems. While many of these papers focus on scheduling the tasks of each of
+The problem of a cylcic flexible manufacturing system has certain limitations, which will be expanded and described in this chapter. The baseline
+of the overall problem is that vehicles, that constantly go in a cycle, are used to carry jobs from one machine to the next. Extensive research 
+has been conducted in various directions considering flexible manufacturing systems. While many of these papers focus on scheduling the tasks of each of
 the jobs on the machines,
 this paper will only consider
 a flow shop approach in which the machines are already sorted in the order, in which the jobs need to be processed. The cyclic version of
 this problem sees the AGVs being routed to drive on a steady course with start and finish being the same point, therefore the AGVs
-are constantly repeating laps of said track. This in turn enables us to know the position of an AGV at any given point in the system solely by
+are constantly repeating laps of that track. This, in turn, enables us to know the position of an AGV at any given point in the system solely by
 setting a starting time at which the AGV is "released". The actual position in the system is then acquired by calculating the overall time minus
 the starting time modulo the lap time.
 
@@ -16,28 +16,26 @@ Pos_{m t} = (T_{m} + t)\>\mathrm{mod}\>l
 \]
 
 Since the schedule of the jobs on the machines themselves is considered to be given, after setting the AGVs to automatically pick up the job 
-which is next in the schedule on the next machine and waiting in the outgoing queue of the current machine, the only input needed to be able
-to achieve a solution is a starting time for each of the AGVs.
+which is next in the schedule on the next machine and waiting in the outgoing queue of the current machine, the only input needed for achieving a solution is a starting time for each of the AGVs.
 
-Before it is possible to formulate an approach to solve this problem, some rules have to be set first, especially considering the handling of
+In order to formulate an approach to solve this problem, some rules have to be set, particularly considering the handling of
 jobs in outgoing queues (jobs which have been completed at a machine but have not yet been picked up by an AGV). Since the system is set to be
-in constant movement, a machine cannot simply wait for a job not yet finished. Therefore a rule has to be set as to which job is to be picked out
-of those waiting in line. This rule requires the machine to pick up the next job in chronological order that is both scheduled to follow the job
+in constant movement, a machine cannot simply wait for a job not yet finished. Therefore a rule must be set as to which job is to be picked out
+of those waiting in line. This rule requires the machine to pick up the next job in a chronological order that is both scheduled to follow the job
 currently being worked on at the next stage, and waiting in the outgoing queue of the current machine e.g. if the first job is currently being
-processed on a machine at the next stage, the second job would be next in line. If that job is not available for transportation, by not being in line yet
-or already being transported, the third is considered and so on.
+processed on a machine at the next stage, the second job would be next in line. If that job is not available for transportation, because it is not in line yet
+or it is already being transported, the third is considered and so on.
 
-The original problem which laid the foundation for this paper, as described by Blazewicz in an unpublished paper \cite{blazewicz198}, differs from the problem the actually examined
-problem in another feature: In the paper by Blazewicz the goal was to minimize the amount of vehicles it takes to be able to
+The original problem, which laid the foundation for this paper, as described by Blazewicz in an unpublished paper \cite{blazewicz198}, differs from the actually examined
+problem in another feature: In the paper by Blazewicz, the goal was to minimize the amount of vehicles it takes to be able to
 deliver all jobs in time to satisfy a given schedule with the amount of allowed laps being given. The approach in this thesis is that there is no
-given deadline known beforehand. The idea is to offer multiple solutions with differing amounts of AGVs given. Each of these solutions will assign
+given deadline known beforehand. The idea is to offer multiple solutions with differing amounts of AGVs fixed. Each of these solutions will assign
 a makespan to a given amount of vehicles, which is defined by the sum of time units passed from the start of the problem until all jobs have been
-completed and have been transported back to the depot. These solutions can then be ranked e.g. via
-a cost function that takes vehicles and time needed into consideration or, if the goal is to finish ahead of a given deadline, the cost function
+completed and have been transported back to the depot. These solutions can then be ranked e.g. through a cost function that takes vehicles and time needed into consideration or, if the goal is to finish ahead of a given deadline, the cost function
 can be set to infinite when exceeding the threshold, to ensure that only the solution with the fewest vehicles which finishes in time will be selected.
 
 As described in the previous paragraph, this paper reformulates the original problem posed in the paper by Blazcewicz et al to be multidimensional. This
 approach has been chosen because it increases the flexibility of the whole approach. While the approach with a given deadline that must be met
-is certainly not only suitable for a rare case, as these problems occur very often in all kinds of fields, a two-dimensional approach which also
-looks at the total makespan introduces the possibility of a deadline that may be broken for a cost (late surcharge) or even simpler a model in
+is certainly not only suitable for a rare case, as these problems occur very often in all kinds of fields, a two-dimensional approach, which also
+takes into account the total makespan, introduces the possibility of a deadline that may be broken for a cost (late surcharge), or even simpler a model in
 which the return is based on producing as fast as possible.

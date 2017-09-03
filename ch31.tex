@@ -1,26 +1,26 @@
 As suggested by the title of this chapter, the program written to return the objective values is a simulation of the problem. Because the problem
 has to the best of the authors knowledge not previously been examined in the literature, there was a need to find a way that would reliably return
 the objective value. The idea of simulation arose from directly examining the problem itself. Since the schedule of jobs on machines is considered
-given, most of the variables left concerned the moving and (un-)loading of vehicles directly. Therefore it was decided that a virtual simulation of
-the vehicles would be best suited as they can reliably be displayed by binary variables moving through arrays. The first variable of the vehicle
-itself depicts, whether or not a vehicle is currently loaded. While a vehicle is loaded, the loaded job number is stored seperately in an additional
-variable. Upon reaching a machine the job is unloaded into the incoming queue and the outgoing queue of the machine is checked for processed jobs
+given, most of the variables left concerned the moving and (un-)loading of vehicles directly. Therefore, it was decided, that a virtual simulation of
+the vehicles would be most suitable, as they can reliably be displayed by binary variables moving through arrays. The first variable of the vehicle
+itself depicts, whether or not a vehicle is currently loaded. While a vehicle is loaded, the loaded job number is stored seperately in another
+variable. Upon reaching a machine, the job is unloaded into the incoming queue and the outgoing queue of the machine is checked for processed jobs
 waiting for transportation to the next machine or the depot. Similar variables exist for all machine stages and parallel machines available at each
-stage: A binary variable depicting whether the machine is loaded or not and an integer variable depicting the actual job number while the machine
+stage: A binary variable depicting, whether the machine is loaded or not, and an integer variable, depicting the actual job number, while the machine
 is processing a job. While these sets of variables set the cornerstone of the whole simulation, additional variables have to be introduced to ensure
 no violations of constraints and the given schedule occur. The following figure shows the definitions of the opening variables in the simulation program.
 
-The program itself runs in steps of single units of time and checks for the following events to occur in chronological order.
+The program itself runs in steps of single units of time and checks for the following events to occur in chronological order:
 
-The first events check if jobs have been completed on the machines:
+The first events check, whether jobs have been completed on the machines:
 
 \begin{itemize}
 \item Is a job currently being worked on by a machine?
 
-\item If there is, is it due to finish right now?
+\item If there is, is it due to finish in this exact moment?
 \end{itemize}
 
-This has to be the first check in the chronological order as a job finished at a given point in time is allowed to immediately be picked up by an
+This must be the first check in chronological order, as a job finished at a given point in time is may immediately be picked up by an
 incoming vehicle. The second set of events looks at everything happening with the vehicles:
 
 \begin{itemize}
@@ -39,8 +39,8 @@ incoming vehicle. The second set of events looks at everything happening with th
 \item If there is, which job of the waiting jobs is the one scheduled earliest on the next machine?
 \end{itemize}
 
-After these checks were made, the final checks for the machines include starting new jobs on respective machines. Similar to the reason presented 
-above, a new job is started last in the chronological order as an incoming job may be started upon arrival, if the corresponding machine is idle.
+After these checks are made, the final checks for the machines include starting new jobs on respective machines. Similar to the reason presented 
+above, a new job is started last in the chronological order, as an incoming job may be started upon arrival, if the corresponding machine is idle.
 
 \begin{itemize}
 \item Is a machine currently idle?
@@ -50,6 +50,6 @@ above, a new job is started last in the chronological order as an incoming job m
 \item Which job is the one scheduled next on this machine?
 \end{itemize}
 
-The entire program will stop looping and return the objective value once all jobs have been fully processed and delivered back to the depot. This
-simulation runs every single time any combination of vehicle starting times is looked at. For consistency reasons it was opted out of storing
-the objective values of previously considered combinations.
+The entire program will stop looping and return the objective value, once all jobs have been fully processed and delivered back to the depot. This
+simulation runs every single time any combination of vehicle starting times is looked at. For consistency reasons, storing
+the objective values of previously considered combinations was avoided.
