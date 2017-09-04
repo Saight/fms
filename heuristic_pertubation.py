@@ -3,7 +3,7 @@
 """
 from readschedule import read_schedule,read_input
 
-def heuristic(maxvehicles,production_vehicles,pmachinesperstage,jobs,roundtime,timebetweenmachines,schedule,duration,iterations,pertubationjump):
+def heuristic(maxvehicles,production_vehicles,pmachinesperstage,jobs,roundtime,timebetweenmachines,schedule,duration,iterations,perturbationjump):
     from readschedule import read_schedule
     import numpy as np
     from random import randint
@@ -35,10 +35,10 @@ def heuristic(maxvehicles,production_vehicles,pmachinesperstage,jobs,roundtime,t
 
         for iteration in range(iterations):
             """
-            pertubation
+            perturbation
 
             all vehiclestartingtimes except for "0-starts" are moved to the front
-            by "pertubationjump" units. If this would cause a machine to start
+            by "perturbationjump" units. If this would cause a machine to start
             earlier than "0" the machine's starting point is instead counted down
             from the back of the schedule. "0-starts" are not moved in an attempt to
             stay in optimal solution range(Cmax is regular, therefore the optimal
@@ -48,13 +48,13 @@ def heuristic(maxvehicles,production_vehicles,pmachinesperstage,jobs,roundtime,t
                 opening_sequence = best_sequence
                 for i in range(len(opening_sequence)):
                     if opening_sequence[i,0]!=1:
-                        for j in range(pertubationjump,len(opening_sequence[0])):
+                        for j in range(perturbationjump,len(opening_sequence[0])):
                             if opening_sequence[i,j] == 1:
-                                opening_sequence[i,j-pertubationjump] = 1
+                                opening_sequence[i,j-perturbationjump] = 1
                                 opening_sequence[i,j] = 0
-                        for j in range(pertubationjump):
+                        for j in range(perturbationjump):
                             if opening_sequence[i,j] == 1:
-                                opening_sequence[i,(j-pertubationjump)%roundtime] = 1
+                                opening_sequence[i,(j-perturbationjump)%roundtime] = 1
                                 opening_sequence[i,j] = 0
 
                 opening_solution = read_schedule(vehicles,production_vehicles,pmachinesperstage,jobs,opening_sequence,roundtime,timebetweenmachines,schedule,duration)
@@ -152,7 +152,7 @@ def heuristic(maxvehicles,production_vehicles,pmachinesperstage,jobs,roundtime,t
 
 
 if __name__ == "__main__":
-    #heuristic(maxvehicles,production_vehicles,pmachinesperstage,jobs,roundtime,timebetweenmachines,schedule,duration,iterations,pertubationjump)
+    #heuristic(maxvehicles,production_vehicles,pmachinesperstage,jobs,roundtime,timebetweenmachines,schedule,duration,iterations,perturbationjump)
     duration = [read_input("ptime.txt")][0]
     schedule = [read_input("pschedule.txt")][0]
     pmachinesperstage = [read_input("pmachinesperstage.txt")][0]
