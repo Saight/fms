@@ -73,7 +73,6 @@ def read_schedule(vehicles,production_machines,pmachinesperstage,jobs,startingti
                                 machine_load[m]=take_job
                                 depot_outqueue.remove(take_job)
                                 depot_out-=1
-                                break
                             else:
                                 tries += 1
             elif position%1 == 0:
@@ -90,7 +89,6 @@ def read_schedule(vehicles,production_machines,pmachinesperstage,jobs,startingti
                                 take_job = schedule[position][tries]
                                 machine_load[m]=take_job
                                 outqueue[position-1].remove(take_job)
-                                break
                             else:
                                 tries += 1
         for p in range(0,production_machines):
